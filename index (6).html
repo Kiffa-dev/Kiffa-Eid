@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>بطاقة معايدة كِفّة</title>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Frutiger LT Arabic', sans-serif;
+      text-align: center;
+      background-color: #3ebfbb;
+    }
+    #cardCanvas {
+      width: 100%;
+      max-width: 768px;
+      height: auto;
+      margin: 10px auto;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    input {
+      padding: 10px;
+      margin-top: 20px;
+      width: 250px;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div style="width: 100%; background-color: #3ebfbb; padding: 20px 0; display: flex; justify-content: center; align-items: center;">
+    <img src="logo-white.png" alt="شعار كِفّة" style="max-width: 200px; height: auto;">
+  </div>
+  <h2 style="color: white;"> ✨ خصص معايدتك باسمك  </h2>
+  <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
+  
+  <p id="successMessage" style="color: green; font-weight: bold; display: none; margin-top: 10px; animation: fadeIn 0.5s ease-in-out;">تم حفظ البطاقة بنجاح 🎉</p>
+
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <canvas id="cardCanvas"></canvas>
+    <button onclick="generateCard()" style="margin-top: 15px;">تحميل البطاقة</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('cardCanvas');
+    const ctx = canvas.getContext('2d');
+    const nameInput = document.getElementById('nameInput');
+
+    const image = new Image();
+    image.src = 'معايدة-الموظفين-01.png';
+
+    image.onload = () => {
+      const scale = 1;
+      canvas.width = image.width * scale;
+      canvas.height = image.height * scale;
+      ctx.scale(scale, scale);
+      ctx.drawImage(image, 0, 0);
+    };
+
+    nameInput.addEventListener('input', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(image, 0, 0);
+      ctx.font = '40px Frutiger LT Arabic';
+      ctx.fillStyle = '#7e543a';
+      ctx.textAlign = 'center';
+      ctx.fillText(nameInput.value, canvas.width / 2, canvas.height - 350);
+    });
+
+    function generateCard() {
+      const link = document.createElement('a');
+      link.download = 'معايدة-كفة.png';
+      link.href = canvas.toDataURL();
+      link.click();
+      const message = document.getElementById('successMessage');
+      message.style.display = 'block';
+      message.style.opacity = 0;
+      setTimeout(() => { message.style.opacity = 1; }, 50);
+    }
+  </script>
+</body>
+</html>
+
