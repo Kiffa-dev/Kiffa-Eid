@@ -71,23 +71,24 @@
     ctx.drawImage(image, 0, 0);
   };
 
-  nameInput.addEventListener('input', () => {
+nameInput.addEventListener('input', () => {
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(image, 0, 0);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, 0, 0);
 
-    // جرب حجم كبير للتأكد
-    ctx.font = 'bold 60px Arial';
-    ctx.fillStyle = '#FFFFFF';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+  // حجم الخط نسبة من الصورة
+  let fontSize = canvas.height / 12;
 
-    ctx.fillText(
-      nameInput.value,
-      canvas.width / 2,
-      canvas.height / 2 + 40
-    );
+  ctx.font = "bold " + fontSize + "px Frutiger LT Arabic";
+  ctx.fillStyle = "#FFFFFF";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
 
+  ctx.fillText(
+    nameInput.value,
+    canvas.width / 2,
+    canvas.height / 2 + 40
+  );
   });
 
   function generateCard() {
