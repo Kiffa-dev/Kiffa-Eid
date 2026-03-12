@@ -53,43 +53,54 @@
     <button onclick="generateCard()" style="margin-top: 15px;">تحميل البطاقة</button>
   </div>
 
-  <script>
-    const canvas = document.getElementById('cardCanvas');
-    const ctx = canvas.getContext('2d');
-    const nameInput = document.getElementById('nameInput');
+<script>
+  const canvas = document.getElementById('cardCanvas');
+  const ctx = canvas.getContext('2d');
+  const nameInput = document.getElementById('nameInput');
 
-    const image = new Image();
-    image.src = 'معايدة-الموظفين-01.png';
+  const image = new Image();
+  image.src = 'معايدة-الموظفين-01.png';
 
-    image.onload = () => {
-      const scale = 1;
-      canvas.width = image.width * scale;
-      canvas.height = image.height * scale;
-      ctx.scale(scale, scale);
-      ctx.drawImage(image, 0, 0);
-    };
-nameInput.addEventListener('input', () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(image, 0, 0);
+  image.onload = () => {
+    canvas.width = image.width;
+    canvas.height = image.height;
+    ctx.drawImage(image, 0, 0);
+  };
 
-  ctx.font = 'bold 24px Frutiger LT Arabic';
-  ctx.fillStyle = '#FFFFFF';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'top';
+  nameInput.addEventListener('input', () => {
 
-  // أعلى الصورة بالمنتصف بشكل مضمون
-  ctx.fillText(nameInput.value, canvas.width / 2, 20);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, 0, 0);
 
-    function generateCard() {
-      const link = document.createElement('a');
-      link.download = 'معايدة-كفة.png';
-      link.href = canvas.toDataURL();
-      link.click();
-      const message = document.getElementById('successMessage');
-      message.style.display = 'block';
-      message.style.opacity = 0;
-      setTimeout(() => { message.style.opacity = 1; }, 50);
-    }
-  </script>
+    ctx.font = 'bold 24px sans-serif';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // ✅ تحت صالح الأعمال (منتصف الصورة تقريباً)
+    ctx.fillText(
+      nameInput.value,
+      canvas.width / 2,
+      canvas.height / 2 + 40
+    );
+
+  });
+
+  function generateCard() {
+
+    const link = document.createElement('a');
+    link.download = 'معايدة-كفة.png';
+    link.href = canvas.toDataURL();
+    link.click();
+
+    const message = document.getElementById('successMessage');
+    message.style.display = 'block';
+    message.style.opacity = 0;
+
+    setTimeout(() => {
+      message.style.opacity = 1;
+    }, 50);
+  }
+</script>
 </body>
 </html>
