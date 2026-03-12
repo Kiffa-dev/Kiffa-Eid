@@ -72,13 +72,13 @@ nameInput.addEventListener('input', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(image, 0, 0);
 
-  ctx.font = '24px Frutiger LT Arabic';
+  ctx.font = 'bold 24px Frutiger LT Arabic';
   ctx.fillStyle = '#FFFFFF';
   ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
 
-  // فوق بالمنتصف
-  ctx.fillText(nameInput.value, canvas.width / 2, 60);
-});
+  // أعلى الصورة بالمنتصف بشكل مضمون
+  ctx.fillText(nameInput.value, canvas.width / 2, 20);
 
     function generateCard() {
       const link = document.createElement('a');
