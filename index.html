@@ -72,10 +72,10 @@
     nameInput.addEventListener('input', () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(image, 0, 0);
-      ctx.font = '60px Frutiger LT Arabic';
+      ctx.font = '24px Frutiger LT Arabic';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'center';
-      ctx.fillText(nameInput.value, canvas.width / 2, canvas.height - 250);
+      ctx.fillText(nameInput.value, canvas.width / 2, 80);
     });
 
     function generateCard() {
